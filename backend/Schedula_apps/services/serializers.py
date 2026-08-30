@@ -26,4 +26,23 @@ class ServiceSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
+    def validate_price(self, value):
+        if value <= 0:
+            raise serializers.ValidationError({
+                "price": ["price must be grater than zero"]
+            })
+        return value
+
+    def validate_title(self, value):
+        if len(value) <= 3:
+            raise serializers.ValidationError({
+                "title": ["title is not correct"]
+            })
+        return value
+
+    def validate_description(self, value):
+        if len(value) < 50:
+            raise serializers.ValidationError({
+                "description": ["inter at least 50 character"]
+            })
 
