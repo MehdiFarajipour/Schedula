@@ -19,6 +19,9 @@ class Settings(BaseSettings):
     EMAIL_HOST_USER: str
     EMAIL_HOST_PASSWORD: str
 
+    # django secret key
+    SECRET_KEY: str
+
 
     model_config = SettingsConfigDict(env_file=BASE_DIR / ".env")
 
