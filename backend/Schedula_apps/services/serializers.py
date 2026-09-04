@@ -15,8 +15,10 @@ class ServiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Service
         fields = ['provider', 'category', 'title', 'description', 'price', 'duration', 'images']
+        read_only_fields = ['provider']
 
     def create(self, validated_data):
+        validated_data['provider'] = self.context["request"].user.provider_profile
         obj = Service.objects.create(**validated_data)
         return obj
 
@@ -45,4 +47,5 @@ class ServiceSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({
                 "description": ["inter at least 50 character"]
             })
+        return value
 
