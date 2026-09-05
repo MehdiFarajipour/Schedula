@@ -7,6 +7,8 @@ from .managers import UserManager
 
 
 class User(AbstractUser):
+    username = None
+
     class RoleChoices(models.TextChoices):
         CUSTOMER = "CUSTOMER", "Customer"
         PROVIDER = "PROVIDER", "Provider"
@@ -14,7 +16,7 @@ class User(AbstractUser):
 
     # fields
     email = models.EmailField(max_length=200, unique=True)
-    phone_number = models.CharField(max_length=11, unique=True)
+    phone_number = models.CharField(max_length=11, unique=True, null=True)
     avatar = models.ImageField(upload_to="users/avatars/", null=True, blank=True)
     password = models.CharField(max_length=100)
     role = models.CharField(max_length=10, choices=RoleChoices.choices, default=RoleChoices.CUSTOMER)
