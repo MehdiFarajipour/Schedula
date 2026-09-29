@@ -54,7 +54,7 @@ ___
 #### Clone the repository
 ```
 git clone <repository-url>
-cd schedula
+cd backend
 ```
 #### Create virtual environment
 ```
