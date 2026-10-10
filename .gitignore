@@ -7,7 +7,6 @@ Engineering_logs/
 images/
 static/
 shop/migrations
-manage.py
 .idea/*
 *.log
 *.pot
