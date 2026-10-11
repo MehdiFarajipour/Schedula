@@ -51,10 +51,13 @@ schedula/
 ```
 ___
 ### 6-Installation
+#### Requirements
+> you must have **node** and **python3.14** installed on your system
+> and if want to use postgreSQL you must have postgres installed
 #### Clone the repository
 ```
 git clone <repository-url>
-cd backend
+cd Schedula/backend
 ```
 #### Create virtual environment
 ```
@@ -72,6 +75,47 @@ Windows
 #### Install dependencies
 ``` 
 pip install -r requirements.txt
+```
+#### Create a `.env` file in location: **Schedula/backend/config/.env**
+linux
+```
+touch config/.env
+```
+windows(CMD)
+``` 
+type nul > config/.env
+```
+#### Create the secret_key
+```
+python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+```
+#### Get the key and copy/paste in **.env** file
+``` 
+SECRET_KEY = 'copied key'
+```
+#### Setup smtp server environment variables
+```
+EMAIL_HOST_USER = 'your email'
+EMAIL_HOST_PASSWORD = 'your app password'
+```
+#### Setup postgres environment variables(if you have postgres)
+``` 
+DB_NAME=database name
+DB_USER= database owner name
+DB_USER_PASS= database owner password
+DB_PORT= port (usually 5432 in localhost)
+DB_HOST= host name (in your system 'localhost')
+```
+#### Create log file
+linux
+``` 
+mkdir logs
+touch logs/app.log
+```
+windows(CMD)
+``` 
+mkdir logs
+type nul > logs/app.log
 ```
 #### Apply migrations
 ``` 
