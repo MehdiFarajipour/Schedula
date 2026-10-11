@@ -98,13 +98,18 @@ SECRET_KEY = 'copied key'
 EMAIL_HOST_USER = 'your email'
 EMAIL_HOST_PASSWORD = 'your app password'
 ```
-#### Setup postgres environment variables(if you have postgres)
+> **you can use sqlite3 or postgreSQL at this point. WARNING: choose one flow**
+##### 1-If you have postgreSQL: setup postgres environment variables in (.env) file
 ``` 
 DB_NAME=database name
 DB_USER= database owner name
 DB_USER_PASS= database owner password
 DB_PORT= port (usually 5432 in localhost)
 DB_HOST= host name (in your system 'localhost')
+```
+##### 2- If you don't have postgresSQL: setup the engine name in (.env) file
+``` 
+DB_ENGINE=sqlite3
 ```
 #### Create log file
 linux

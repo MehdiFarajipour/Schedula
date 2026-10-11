@@ -89,24 +89,40 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'HOST': config_settings.DB_HOST,
-        'NAME': config_settings.DB_NAME,
-        'USER': config_settings.DB_USER,
-        'PASSWORD': config_settings.DB_USER_PASS,
-        'PORT': config_settings.DB_PORT,
-
+if config_settings.DB_ENGINE == "sqlite3":
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+
+else:
+    required_db_settings = {
+        "DB_NAME": config_settings.DB_NAME,
+        'DB_USER': config_settings.DB_USER,
+        "DB_PASSWORD": config_settings.DB_USER_PASS
+    }
+
+    missing = [
+        key for key, value in required_db_settings.items() if not value
+    ]
+
+    if missing:
+        raise ValueError(f"Missing postgreSQL settings {', '.join(missing)}")
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'HOST': config_settings.DB_HOST,
+            'NAME': config_settings.DB_NAME,
+            'USER': config_settings.DB_USER,
+            'PASSWORD': config_settings.DB_USER_PASS,
+            'PORT': config_settings.DB_PORT,
+
+        }
+    }
 
 
 # Password validation
